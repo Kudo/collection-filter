@@ -56,7 +56,7 @@ Copyright 2015, Kudo Chien
 
 Licensed under a `MIT license`_.
 
-.. |Build Status| image:: https://travis-ci.org/kudo/collection-filter.png?branch=master
-   :target: https://travis-ci.org/kudo/collection-filter
+.. |Build Status| image:: https://travis-ci.org/Kudo/collection-filter.svg?branch=master
+   :target: https://travis-ci.org/Kudo/collection-filter
 
 .. _MIT license: http://opensource.org/licenses/MIT
