@@ -39,14 +39,29 @@ Then:
     {'foo': {'bar': 2}}
 
     # Query a list
-    >>> collection_filter([{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4}], '[*].foo')
+    >>> collection_filter([{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4}], '[].foo')
     [{'foo': 1}, {'foo': 3}]
+
+    # list/dict combination example
+    >>> collection_filter({'foo': 'bar', 'aListOfDict': [{'foo': 1, 'bar': 2}], 'aListOfDict[].foo')
+    {'aListOfDict': [{'foo': 1}]}
 
 
 Syntax
 ---------------
 
-*TBD*
+Currently support operators
+
++----------+------------------------------------------------+
+| Operator | Description                                    |  
++==========+================================================+
+| ,        | Multiple field query sperated by comma         |
++----------+------------------------------------------------+
+| []       | To indicate the data should be handled as list |
++----------+------------------------------------------------+
+| .        | Dot notation should follow with a symbol name  |
+|          | which to specify a field in current dict data  |
++----------+------------------------------------------------+
 
  
 Copyright and License
