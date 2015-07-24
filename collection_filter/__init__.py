@@ -1,3 +1,3 @@
-from .collection_filter import *
+from .collection_filter import collection_filter
 
-__version__ = '0.1'
+__version__ = '0.2'

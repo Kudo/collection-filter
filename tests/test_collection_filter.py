@@ -78,7 +78,7 @@ class Test_CollectionFilter(object):
     def test_DataDictIncludeListWithFieldsArrayKeyQuery_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'aList': [{'elem1': 1}, {'elem2': 2}, {'elem3': 3}]}
-        fields = 'aList[*]'
+        fields = 'aList[]'
 
         # Act
         result = collection_filter(data, fields)
@@ -89,7 +89,7 @@ class Test_CollectionFilter(object):
     def test_DataDictIncludeListWithFieldsDeepKeyQuery_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'aList': [{'elem1': 1}, {'elem2': 2}, {'elem3': 3}]}
-        fields = 'aList[*].elem1'
+        fields = 'aList[].elem1'
 
         # Act
         result = collection_filter(data, fields)
@@ -100,7 +100,7 @@ class Test_CollectionFilter(object):
     def test_DataDictIncludeListComplexWithFieldsDeepKeyQuery_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'aList': [{'elem1': {'foo': 1, 'bar': 2}}, {'elem2': {'foo': 'bar'}}, {'elem3': {'foo': 'bar'}}]}
-        fields = 'aList[*].elem1.foo'
+        fields = 'aList[].elem1.foo'
 
         # Act
         result = collection_filter(data, fields)
@@ -122,7 +122,7 @@ class Test_CollectionFilter(object):
     def test_DataDictWithFieldsArrayQuery_RaiseException(self):
         # Arrange
         data = {'foo': 1, 'bar': 2}
-        fields = '[*].foo'
+        fields = '[].foo'
 
         # Act & Assert
         with pytest.raises(AssertionError):
@@ -147,7 +147,7 @@ class Test_CollectionFilter(object):
     def test_DataListWithFieldsArrayQuery_ReturnOriginalList(self):
         # Arrange
         data = [{'foo': 1}, {'bar': 2}]
-        fields = '[*]'
+        fields = '[]'
 
         # Act
         result = collection_filter(data, fields)
@@ -169,7 +169,7 @@ class Test_CollectionFilter(object):
     def test_DataListWithFieldsArrayQuery_ReturnSubsetOfListData(self):
         # Arrange
         data = [{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4, 'orange': 'banana'}]
-        fields = '[*].foo'
+        fields = '[].foo'
 
         # Act
         result = collection_filter(data, fields)
@@ -180,7 +180,7 @@ class Test_CollectionFilter(object):
     def test_DataListWithFieldsTwoArrayQuery_ReturnSubsetOfListData(self):
         # Arrange
         data = [{'foo': {'apple': 1, 'orange': 2}}, {'foo': {'apple': 3, 'orange': 4, 'banana': 5}}]
-        fields = '[*].foo.apple,[*].foo.orange'
+        fields = '[].foo.apple,[].foo.orange'
 
         # Act
         result = collection_filter(data, fields)
@@ -191,7 +191,7 @@ class Test_CollectionFilter(object):
     def test_DataListWithFieldsNonexistingArrayQuery_ReturnEmptyListData(self):
         # Arrange
         data = [{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4, 'orange': 'banana'}]
-        fields = '[*].nonexisted'
+        fields = '[].nonexisted'
 
         # Act
         result = collection_filter(data, fields)
@@ -243,7 +243,7 @@ class Test_CollectionFilter(object):
     def test_DataListOfPrimitiveTypeWithFieldsArrayQuery_RaiseException(self):
         # Arrange
         data = [1, 2, 3]
-        fields = '[*].address'
+        fields = '[].address'
 
         # Act & Assert
         with pytest.raises(AssertionError):
@@ -252,7 +252,7 @@ class Test_CollectionFilter(object):
     def test_DataListOfListWithFieldsArrayQuery_RaiseException(self):
         # Arrange
         data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-        fields = '[*].address'
+        fields = '[].address'
 
         # Act & Assert
         with pytest.raises(AssertionError):
