@@ -9,7 +9,7 @@ class Test_CollectionFilter(object):
     # ################################################################
     # Input data as dict
     # ################################################################
-    def test_PartialDataFilter_DataDictWithFieldsEmpty_ReturnOriginalData(self):
+    def test_DataDictWithFieldsEmpty_ReturnOriginalData(self):
         # Arrange
         data = {'foo': 'bar'}
         fields = None
@@ -20,7 +20,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert data == result
 
-    def test_PartialDataFilter_DataDictWithFieldsEmptyString_ReturnOriginalData(self):
+    def test_DataDictWithFieldsEmptyString_ReturnOriginalData(self):
         # Arrange
         data = {'foo': 'bar'}
         fields = ''
@@ -31,7 +31,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert data == result
 
-    def test_PartialDataFilter_DataDictWithFieldsOneElement_ReturnSubsetData(self):
+    def test_DataDictWithFieldsOneElement_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'bar': 2}
         fields = 'foo'
@@ -42,7 +42,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'foo': 1}
 
-    def test_PartialDataFilter_DataDictWithFieldsTwoElement_ReturnSubsetData(self):
+    def test_DataDictWithFieldsTwoElement_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'bar': 2, 'Alice': 'someone', 'Bob': 'Say Hi!'}
         fields = 'foo,Alice'
@@ -53,7 +53,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'foo': 1, 'Alice': 'someone'}
 
-    def test_PartialDataFilter_DataDictTwoLevelWithFieldsTwoElement_ReturnSubsetData(self):
+    def test_DataDictTwoLevelWithFieldsTwoElement_ReturnSubsetData(self):
         # Arrange
         data = {'foo': {'Alice': 'someone', 'Bob': 'Say Hi!', 'orange': 'banana'}}
         fields = 'foo.Alice,foo.orange'
@@ -64,7 +64,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'foo': {'Alice': 'someone', 'orange': 'banana'}}
 
-    def test_PartialDataFilter_DataDictIncludeListWithFieldsSimpleKeyQuery_ReturnSubsetData(self):
+    def test_DataDictIncludeListWithFieldsSimpleKeyQuery_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'aList': [{'elem1': 1}, {'elem2': 2}, {'elem3': 3}]}
         fields = 'aList'
@@ -75,7 +75,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'aList': [{'elem1': 1}, {'elem2': 2}, {'elem3': 3}]}
 
-    def test_PartialDataFilter_DataDictIncludeListWithFieldsArrayKeyQuery_ReturnSubsetData(self):
+    def test_DataDictIncludeListWithFieldsArrayKeyQuery_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'aList': [{'elem1': 1}, {'elem2': 2}, {'elem3': 3}]}
         fields = 'aList[*]'
@@ -86,7 +86,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'aList': [{'elem1': 1}, {'elem2': 2}, {'elem3': 3}]}
 
-    def test_PartialDataFilter_DataDictIncludeListWithFieldsDeepKeyQuery_ReturnSubsetData(self):
+    def test_DataDictIncludeListWithFieldsDeepKeyQuery_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'aList': [{'elem1': 1}, {'elem2': 2}, {'elem3': 3}]}
         fields = 'aList[*].elem1'
@@ -97,7 +97,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'aList': [{'elem1': 1}, {}, {}]}
 
-    def test_PartialDataFilter_DataDictIncludeListComplexWithFieldsDeepKeyQuery_ReturnSubsetData(self):
+    def test_DataDictIncludeListComplexWithFieldsDeepKeyQuery_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'aList': [{'elem1': {'foo': 1, 'bar': 2}}, {'elem2': {'foo': 'bar'}}, {'elem3': {'foo': 'bar'}}]}
         fields = 'aList[*].elem1.foo'
@@ -108,7 +108,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'aList': [{'elem1': {'foo': 1}}, {}, {}]}
 
-    def test_PartialDataFilter_DataDictWithFieldsTwoLevelQuery_ReturnDeepData(self):
+    def test_DataDictWithFieldsTwoLevelQuery_ReturnDeepData(self):
         # Arrange
         data = {'aDict': {'bar': 2, 'Alice': 'someone', 'Bob': 'Say Hi!'}}
         fields = 'aDict.Alice'
@@ -119,7 +119,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'aDict': {'Alice': 'someone'}}
 
-    def test_PartialDataFilter_DataDictWithFieldsArrayQuery_RaiseException(self):
+    def test_DataDictWithFieldsArrayQuery_RaiseException(self):
         # Arrange
         data = {'foo': 1, 'bar': 2}
         fields = '[*].foo'
@@ -133,7 +133,7 @@ class Test_CollectionFilter(object):
     # Input data as list
     # ################################################################
 
-    def test_PartialDataFilter_DataListOfObjectWithFieldsEmpty_ReturnOriginalData(self):
+    def test_DataListOfObjectWithFieldsEmpty_ReturnOriginalData(self):
         # Arrange
         data = [{'foo': 1}, {'bar': 2}]
         fields = None
@@ -144,7 +144,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert data == result
 
-    def test_PartialDataFilter_DataListWithFieldsArrayQuery_ReturnOriginalList(self):
+    def test_DataListWithFieldsArrayQuery_ReturnOriginalList(self):
         # Arrange
         data = [{'foo': 1}, {'bar': 2}]
         fields = '[*]'
@@ -155,7 +155,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == data
 
-    def test_PartialDataFilter_DataListOfObjectWithFieldsEmptyString_ReturnOriginalData(self):
+    def test_DataListOfObjectWithFieldsEmptyString_ReturnOriginalData(self):
         # Arrange
         data = [{'foo': 1}, {'bar': 2}]
         fields = ''
@@ -166,7 +166,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert data == result
 
-    def test_PartialDataFilter_DataListWithFieldsArrayQuery_ReturnSubsetOfListData(self):
+    def test_DataListWithFieldsArrayQuery_ReturnSubsetOfListData(self):
         # Arrange
         data = [{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4, 'orange': 'banana'}]
         fields = '[*].foo'
@@ -177,7 +177,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == [{'foo': 1}, {'foo': 3}]
 
-    def test_PartialDataFilter_DataListWithFieldsTwoArrayQuery_ReturnSubsetOfListData(self):
+    def test_DataListWithFieldsTwoArrayQuery_ReturnSubsetOfListData(self):
         # Arrange
         data = [{'foo': {'apple': 1, 'orange': 2}}, {'foo': {'apple': 3, 'orange': 4, 'banana': 5}}]
         fields = '[*].foo.apple,[*].foo.orange'
@@ -188,7 +188,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == [{'foo': {'apple': 1, 'orange': 2}}, {'foo': {'apple': 3, 'orange': 4}}]
 
-    def test_PartialDataFilter_DataListWithFieldsNonexistingArrayQuery_ReturnEmptyListData(self):
+    def test_DataListWithFieldsNonexistingArrayQuery_ReturnEmptyListData(self):
         # Arrange
         data = [{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4, 'orange': 'banana'}]
         fields = '[*].nonexisted'
@@ -199,7 +199,7 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == [{}, {}]
 
-    def test_PartialDataFilter_DataListWithFieldOneKey_RaiseException(self):
+    def test_DataListWithFieldOneKey_RaiseException(self):
         # Arrange
         data = [{'foo': 1}, {'bar': 2}]
         fields = 'foo'
@@ -213,7 +213,7 @@ class Test_CollectionFilter(object):
     # Input data which is NOT supported
     # ################################################################
 
-    def test_PartialDataFilter_DataPrimitiveTypeWithFieldsDontCare_RaiseException(self):
+    def test_DataPrimitiveTypeWithFieldsDontCare_RaiseException(self):
         # Arrange
         data = 1
         fields = 'foo'
@@ -222,7 +222,7 @@ class Test_CollectionFilter(object):
         with pytest.raises(AssertionError):
             result = collection_filter(data, fields)
 
-    def test_PartialDataFilter_DataListOfPrimitiveTypeWithFieldsDontCare_RaiseException(self):
+    def test_DataListOfPrimitiveTypeWithFieldsDontCare_RaiseException(self):
         # Arrange
         data = [1, 2, 3]
         fields = 'foo'
@@ -231,7 +231,7 @@ class Test_CollectionFilter(object):
         with pytest.raises(AssertionError):
             result = collection_filter(data, fields)
 
-    def test_PartialDataFilter_DataListOfListWithFieldsDontCare_RaiseException(self):
+    def test_DataListOfListWithFieldsDontCare_RaiseException(self):
         # Arrange
         data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
         fields = 'foo'
@@ -240,7 +240,7 @@ class Test_CollectionFilter(object):
         with pytest.raises(AssertionError):
             result = collection_filter(data, fields)
 
-    def test_PartialDataFilter_DataListOfPrimitiveTypeWithFieldsArrayQuery_RaiseException(self):
+    def test_DataListOfPrimitiveTypeWithFieldsArrayQuery_RaiseException(self):
         # Arrange
         data = [1, 2, 3]
         fields = '[*].address'
@@ -249,7 +249,7 @@ class Test_CollectionFilter(object):
         with pytest.raises(AssertionError):
             result = collection_filter(data, fields)
 
-    def test_PartialDataFilter_DataListOfListWithFieldsArrayQuery_RaiseException(self):
+    def test_DataListOfListWithFieldsArrayQuery_RaiseException(self):
         # Arrange
         data = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
         fields = '[*].address'
