@@ -86,7 +86,7 @@ def collection_filter(data, fields):
 
     data_as_list = type(data) == list
     if data_as_list:
-        result = [{} for _ in xrange(len(data))]
+        result = [{} for _ in range(len(data))]
     else:
         result = {}
 
@@ -96,7 +96,7 @@ def collection_filter(data, fields):
         sub_field, remain_query = _get_next_field(field)
         subset = _inner_filter(copy.copy(data), sub_field, remain_query)
         if data_as_list:
-            for idx in xrange(len(data)):
+            for idx in range(len(data)):
                 result[idx] = _mergedict(result[idx], subset[idx])
         else:
             result = _mergedict(result, subset)
