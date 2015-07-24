@@ -106,7 +106,7 @@ class Test_CollectionFilter(object):
         result = collection_filter(data, fields)
 
         # Assert
-        assert result == {'aList': [{'elem1': {'foo': 1, 'bar': 2}}, {}, {}]}
+        assert result == {'aList': [{'elem1': {'foo': 1}}, {}, {}]}
 
     def test_PartialDataFilter_DataDictWithFieldsTwoLevelQuery_ReturnDeepData(self):
         # Arrange
@@ -128,15 +128,6 @@ class Test_CollectionFilter(object):
         with pytest.raises(AssertionError):
             result = collection_filter(data, fields)
 
-    def test_PartialDataFilter_DataDictWithFieldsInvalidArrayQuerySyntax_RaiseException(self):
-        # Arrange
-        data = [{'foo': 1}, {'bar': 2}]
-        fields = '[*]'
-
-        # Act & Assert
-        with pytest.raises(AssertionError):
-            result = collection_filter(data, fields)
-
 
     # ################################################################
     # Input data as list
@@ -152,6 +143,17 @@ class Test_CollectionFilter(object):
 
         # Assert
         assert data == result
+
+    def test_PartialDataFilter_DataListWithFieldsArrayQuery_ReturnOriginalList(self):
+        # Arrange
+        data = [{'foo': 1}, {'bar': 2}]
+        fields = '[*]'
+
+        # Act
+        result = collection_filter(data, fields)
+
+        # Assert
+        assert result == data
 
     def test_PartialDataFilter_DataListOfObjectWithFieldsEmptyString_ReturnOriginalData(self):
         # Arrange
@@ -177,14 +179,14 @@ class Test_CollectionFilter(object):
 
     def test_PartialDataFilter_DataListWithFieldsTwoArrayQuery_ReturnSubsetOfListData(self):
         # Arrange
-        data = [{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4, 'orange': 'banana'}]
-        fields = '[*].foo,[*].bar'
+        data = [{'foo': {'apple': 1, 'orange': 2}}, {'foo': {'apple': 3, 'orange': 4, 'banana': 5}}]
+        fields = '[*].foo.apple,[*].foo.orange'
 
         # Act
         result = collection_filter(data, fields)
 
         # Assert
-        assert result == [{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4}]
+        assert result == [{'foo': {'apple': 1, 'orange': 2}}, {'foo': {'apple': 3, 'orange': 4}}]
 
     def test_PartialDataFilter_DataListWithFieldsNonexistingArrayQuery_ReturnEmptyListData(self):
         # Arrange
