@@ -7,6 +7,6 @@ install:
   - pip install . --use-mirrors
   - pip install pytest-cov --use-mirrors
 script:
-  - py.test -cov
+  - py.test --cov collection_filter
 after_success:
   - coveralls
