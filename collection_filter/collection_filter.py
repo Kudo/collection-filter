@@ -85,11 +85,11 @@ def _inner_filter(data,
             field = field[:-2]
 
         # Fetch subset dict data by field
-        result = data.get(field, {})
+        result = data.get(field)
 
         # Do next query if need
         next_field, remain_query = _get_next_field(remain_query)
-        if next_field:
+        if next_field and result is not None:
             result = _inner_filter(result,
                                    next_field,
                                    remain_query,
@@ -97,7 +97,7 @@ def _inner_filter(data,
 
         # Return {field: result} if there are existed next query
         # Otherwise, return empty dictionary
-        if result:
+        if result is not None:
             return {field: result}
         else:
             return {}
