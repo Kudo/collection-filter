@@ -3,7 +3,7 @@ Python collection filter
 
 https://github.com/kudo/collection-filter
 
-|Build Status|
+|Build Status| |Unit Test Coverage|
 
 This library provides a DSL filter for list or dict data.
 It is original designed for RESTful API partial response.
@@ -73,5 +73,8 @@ Licensed under a `MIT license`_.
 
 .. |Build Status| image:: https://travis-ci.org/Kudo/collection-filter.svg?branch=master
    :target: https://travis-ci.org/Kudo/collection-filter
+
+.. |Unit Test Coverage| image:: https://coveralls.io/repos/Kudo/collection-filter/badge.svg?branch=master&service=github
+   :target: https://coveralls.io/github/Kudo/collection-filter?branch=master
 
 .. _MIT license: http://opensource.org/licenses/MIT
