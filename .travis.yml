@@ -4,9 +4,9 @@ python:
   - "2.7"
   - "3.4"
 install:
-  - pip install .
+  - python setup.py develop
   - pip install pytest-cov coveralls
 script:
-  - py.test --cov collection_filter tests
+  - py.test --cov collection_filter
 after_success:
   - coveralls
