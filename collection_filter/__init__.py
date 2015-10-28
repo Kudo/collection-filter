@@ -1,3 +1,3 @@
 from .collection_filter import collection_filter
 
-__version__ = '0.3'
+__version__ = '0.5'

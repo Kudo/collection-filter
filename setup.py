@@ -3,7 +3,7 @@ import io
 
 setuptools.setup(
     name='collection-filter',
-    version='0.3',
+    version='0.5',
     description=(
         'A small list/dict DSL for field filter ' +
         'specific designed for RESTful API partial response.'
