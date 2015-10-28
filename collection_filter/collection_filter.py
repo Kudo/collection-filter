@@ -1,21 +1,7 @@
 import copy
-
-
-def _mergedict(dict1, dict2):
-    '''Merge two dictionaries and return the new dictionary
-    '''
-    def _merge_inner(inner_dict1, inner_dict2):
-        for key, value in inner_dict1.items():
-            if isinstance(value, dict):
-                # get node or create one
-                node = inner_dict2.setdefault(key, {})
-                _merge_inner(value, node)
-            else:
-                inner_dict2[key] = value
-        return inner_dict2
-
-    # Immutable dict2
-    return _merge_inner(dict1, copy.copy(dict2))
+from .dict_utils import (
+    dict_union,
+)
 
 
 def _get_next_field(query):
@@ -124,12 +110,12 @@ def collection_filter(data, fields):
     for field in fields.split(','):
         # [2] For each dot notated sub field, do further query recursively
         next_field, remain_query = _get_next_field(field)
-        subset = _inner_filter(copy.copy(data), next_field, remain_query)
+        subset = _inner_filter(copy.deepcopy(data), next_field, remain_query)
         if data_as_list:
             # [3-1] For list, set each element as merged dictionary
             for idx in range(len(data)):
-                result[idx] = _mergedict(result[idx], subset[idx])
+                result[idx] = dict_union(result[idx], subset[idx])
         else:
-            # [3-2] For dictionary, simply do merge
-            result = _mergedict(result, subset)
+            # [3-2] For dictionary, do union
+            result = dict_union(result, subset)
     return result

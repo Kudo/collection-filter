@@ -97,6 +97,17 @@ class Test_CollectionFilter(object):
         # Assert
         assert result == {'aList': [{'elem1': 1}, {}, {}]}
 
+    def test_DataDictIncludeListWithTwoFieldsDeepKeyQuery_ReturnUnionSubsetData(self):
+        # Arrange
+        data = {'foo': 1, 'aList': [{'foo': 1, 'bar': 2, 'dontcare': 99}, {'foo': 3, 'bar': 4, 'dontcare': 100}]}
+        fields = 'aList[].foo,aList[].bar'
+
+        # Act
+        result = collection_filter(data, fields)
+
+        # Assert
+        assert result == {'aList': [{'foo': 1, 'bar': 2}, {'foo': 3, 'bar': 4}]}
+
     def test_DataDictIncludeListComplexWithFieldsDeepKeyQuery_ReturnSubsetData(self):
         # Arrange
         data = {'foo': 1, 'aList': [{'elem1': {'foo': 1, 'bar': 2}}, {'elem2': {'foo': 'bar'}}, {'elem3': {'foo': 'bar'}}]}
