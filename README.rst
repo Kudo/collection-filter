@@ -43,7 +43,7 @@ Then:
     [{'foo': 1}, {'foo': 3}]
 
     # list/dict combination example
-    >>> collection_filter({'foo': 'bar', 'aListOfDict': [{'foo': 1, 'bar': 2}], 'aListOfDict[].foo')
+    >>> collection_filter({'foo': 'bar', 'aListOfDict': [{'foo': 1, 'bar': 2}]}, 'aListOfDict[].foo')
     {'aListOfDict': [{'foo': 1}]}
 
 
